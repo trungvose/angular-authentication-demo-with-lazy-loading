@@ -1,3 +1,3 @@
-# angular-49jpqd
+# angular-authentication-demo-with-lazy-loading
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-49jpqd)
+[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-authentication-demo-with-lazy-loading)
