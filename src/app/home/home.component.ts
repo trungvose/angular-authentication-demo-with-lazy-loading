@@ -2,7 +2,7 @@
 import { first } from 'rxjs/operators';
 
 import { User } from '../_models';
-import { UserService, AuthenticationService } from '../_services';
+import { UserService, AuthService } from '../_services';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit {
@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
     users = [];
 
     constructor(
-        private authenticationService: AuthenticationService,
+        private authenticationService: AuthService,
         private userService: UserService
     ) {
         this.currentUser = this.authenticationService.currentUserVal;

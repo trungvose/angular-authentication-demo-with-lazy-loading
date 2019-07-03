@@ -1,7 +1,7 @@
 ﻿import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { AuthenticationService } from "./_services";
+import { AuthService } from "./_services";
 import { User } from "./_models";
 @Component({
     selector: "app-root",
@@ -12,7 +12,7 @@ export class AppComponent {
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthService
     ) {
         this.authenticationService.currentUser.subscribe(
             x => (this.currentUser = x)

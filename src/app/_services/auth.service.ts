@@ -4,9 +4,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../_models';
+import { ConstValue } from '../_helpers/constValue';
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class AuthService {
     private _currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
@@ -19,7 +20,7 @@ export class AuthenticationService {
     }
 
     constructor(private http: HttpClient) {
-        this._currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this._currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(ConstValue.CurrentUser)));
         this.currentUser = this._currentUserSubject.asObservable();
     }
 
@@ -27,7 +28,7 @@ export class AuthenticationService {
         return this.http.post<any>(`/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem(ConstValue.CurrentUser, JSON.stringify(user));
                 this._currentUserSubject.next(user);
                 return user;
             }));
@@ -35,7 +36,7 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage and set current user to null
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem(ConstValue.CurrentUser);
         this._currentUserSubject.next(null);
     }
 }
