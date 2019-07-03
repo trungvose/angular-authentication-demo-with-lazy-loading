@@ -20,7 +20,7 @@ export class AuthService {
     }
 
     constructor(private http: HttpClient) {
-        this._currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(ConstValue.CurrentUser)));
+        this._currentUserSubject = new BehaviorSubject<User>(this.getUserFromLocalStorage());
         this.currentUser = this._currentUserSubject.asObservable();
     }
 
@@ -39,4 +39,12 @@ export class AuthService {
         localStorage.removeItem(ConstValue.CurrentUser);
         this._currentUserSubject.next(null);
     }
+
+    private getUserFromLocalStorage(): User {
+        try {
+          return JSON.parse(localStorage.getItem(ConstValue.CurrentUser)!);
+        } catch (error) {
+          return null!;
+        }
+      }
 }
