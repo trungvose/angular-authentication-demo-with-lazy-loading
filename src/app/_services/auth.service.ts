@@ -16,7 +16,7 @@ export class AuthService {
     }
 
     get currentUserToken() {
-        return this.currentUserVal.token;
+        return this.currentUserVal && this.currentUserVal.token;
     }
 
     constructor(private http: HttpClient) {
